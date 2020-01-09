@@ -73,13 +73,18 @@ class PostController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  string  $slug
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
     public function edit($slug)
     {
         // Get post by unique slug
         $post = Post::whereSlug($slug)->firstOrFail();
-        return view('edit', compact('post'));
+        // Allow post edit only to post writers
+        if (Auth::id() == $post->user_id) {
+            return view('edit', compact('post'));
+        } else {
+            return redirect(action('PostController@show', $post->slug))->withErrors('You are not the original post writer!');
+        }
     }
 
     /**
@@ -96,9 +101,13 @@ class PostController extends Controller
         // Define properties from request data
         $post->title = $request->get('title');
         $post->body = $request->get('body');
-        // Store new values and redirect
-        $post->save();
-        return redirect(action('PostController@edit', $post->slug))->with('status', 'The post with the slug ' . $slug . ' has been updated!');
+        // Allow post update only to post writers
+        if (Auth::id() == $post->user_id) {
+            $post->save();
+            return redirect(action('PostController@edit', $post->slug))->with('status', 'The post with the slug ' . $slug . ' has been updated!');
+        } else {
+            return redirect(action('PostController@show', $post->slug))->withErrors('You are not the original post writer!');
+        }
     }
 
     /**
@@ -111,8 +120,12 @@ class PostController extends Controller
     {
         // Get post by unique slug
         $post = Post::whereSlug($slug)->firstOrFail();
-        $post->delete();
-        // Redirect with message
-        return redirect('/home')->with('status', 'The post with the slug ' . $slug . ' has been deleted!');
+        // Allow post deletion only to post writers
+        if (Auth::id() == $post->user_id) {
+            $post->delete();
+            return redirect('/home')->with('status', 'The post with the slug ' . $slug . ' has been deleted!');
+        } else {
+            return redirect(action('PostController@show', $post->slug))->withErrors('You are not the original post writer!');
+        }
     }
 }
