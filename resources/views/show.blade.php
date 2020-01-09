@@ -33,6 +33,16 @@
             </div>
         </div>
         <hr>
+        <h3>Comments</h3>
+        @foreach($comments as $comment)
+            <div class="card">
+                <div class="card-body">
+                    {!! $comment->text !!}
+                </div>
+            </div>
+            <br>
+        @endforeach
+        <hr>
         <div class="row">
             <div class="col-md-12">
                 <form method="post" action="/comment">
