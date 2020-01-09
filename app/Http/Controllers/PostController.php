@@ -100,11 +100,15 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  string  $slug
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroy($id)
+    public function destroy($slug)
     {
-        //
+        // Get post by unique slug
+        $post = Post::whereSlug($slug)->firstOrFail();
+        $post->delete();
+        // Redirect with message
+        return redirect('/')->with('status', 'The post with the slug ' . $slug . ' has been deleted!');
     }
 }
