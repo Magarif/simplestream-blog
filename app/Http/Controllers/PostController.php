@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostCreateRequest;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -39,13 +40,16 @@ class PostController extends Controller
      */
     public function store(PostCreateRequest $request)
     {
+        // Get auth user
+        $user = Auth::user();
         // Generate unique slug
         $slug = uniqid();
         // Store post object in db
         $post = new Post([
             'title' => $request->get('title'),
             'body' => $request->get('body'),
-            'slug' => $slug
+            'slug' => $slug,
+            'user_id' => $user->getAuthIdentifier()
         ]);
         $post->save();
         // Redirect
