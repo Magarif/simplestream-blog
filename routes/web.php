@@ -17,9 +17,9 @@ Route::get('/home', 'PostController@index');
 Route::get('/create', 'PostController@create')->middleware('auth');
 Route::post('/create', 'PostController@store')->middleware('auth');
 Route::get('/post/{slug?}', 'PostController@show');
-Route::get('/post/{slug?}/edit', 'PostController@edit');
-Route::patch('/post/{slug?}/edit', 'PostController@update');
-Route::delete('/post/{slug?}/delete', 'PostController@destroy');
+Route::get('/post/{slug?}/edit', 'PostController@edit')->middleware('auth');
+Route::patch('/post/{slug?}/edit', 'PostController@update')->middleware('auth');
+Route::delete('/post/{slug?}/delete', 'PostController@destroy')->middleware('auth');
 // Auth routes
 Route::get('/auth/register', 'Auth\RegisterController@showRegistrationForm');
 Route::post('/auth/register', 'Auth\RegisterController@register');
