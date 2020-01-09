@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -9,11 +10,13 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        //
+        // Pass all posts to index view
+        $posts = Post::all();
+        return view('index', compact('posts'));
     }
 
     /**
