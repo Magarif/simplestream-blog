@@ -109,6 +109,6 @@ class PostController extends Controller
         $post = Post::whereSlug($slug)->firstOrFail();
         $post->delete();
         // Redirect with message
-        return redirect('/')->with('status', 'The post with the slug ' . $slug . ' has been deleted!');
+        return redirect('/home')->with('status', 'The post with the slug ' . $slug . ' has been deleted!');
     }
 }
