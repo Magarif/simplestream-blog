@@ -15,6 +15,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $post->title }}</h5>
                         <p class="card-text"><strong>Body:</strong> {{ $post->body }}</p>
+                        <a href="{!! action('PostController@show', $post->slug) !!}" class="btn btn-primary">Show post</a>
                     </div>
                 </div>
                 <br>
