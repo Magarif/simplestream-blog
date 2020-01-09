@@ -12,10 +12,13 @@
 */
 
 
-Route::get('/', 'PostController@index');
+Route::get('/home', 'PostController@index');
 Route::get('/create', 'PostController@create');
 Route::post('/create', 'PostController@store');
 Route::get('/post/{slug?}', 'PostController@show');
 Route::get('/post/{slug?}/edit', 'PostController@edit');
 Route::patch('/post/{slug?}/edit', 'PostController@update');
 Route::delete('/post/{slug?}/delete', 'PostController@destroy');
+// Auth routes
+Route::get('/auth/register', 'Auth\RegisterController@showRegistrationForm');
+Route::post('/auth/register', 'Auth\RegisterController@register');
