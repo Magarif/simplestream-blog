@@ -12,7 +12,14 @@
         </div>
         <div class="container">
             <div class="row">
-                <a href="{!! action('PostController@edit', $post->slug) !!}" class="btn btn-primary pull-left">Edit post</a>
+                <a href="{!! action('PostController@edit', $post->slug) !!}" class="btn btn-primary pull-left">Edit post</a>&nbsp;
+                <form method="post" action="{!! action('PostController@destroy', $post->slug) !!}" class="pull-left">
+                    {{ csrf_field() }}
+                    @method('DELETE')
+                    <div>
+                        <button type="submit" class="btn btn-dark">Delete post</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
