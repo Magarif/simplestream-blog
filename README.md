@@ -1,9 +1,10 @@
-## Simplestream code test
----
+# Simplestream code test
+
 This repository represent simple blog application using Laravel according to Code test documentation.
 
-#### Local setup instructions
-**Option 1 - No Vagrant, Docker or Valet required (simple local installation)**
+### Local setup instructions
+
+#### Option 1 - No Vagrant, Docker or Valet required (simple local installation)
 
 Prerequisites:
 - Php >= 7.2.0
@@ -22,7 +23,7 @@ Step 5. - Run `php artisan serve` command in CLI. Simple Php server will run on 
 
 Step 6. - Test application
 
-**Option 2 - Valet required (see [here](https://laravel.com/docs/6.x/valet) for install)**
+#### Option 2 - Valet required (see [here](https://laravel.com/docs/6.x/valet) for install)
 
 Move app in Valet folder.
 Repeat steps 1 - 4 and fire app in browser to test it. If you choose defaults in Valet installation it will be on address http://simplestream-blog.test
