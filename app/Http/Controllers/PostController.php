@@ -68,12 +68,14 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  string  $slug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        // Get post by unique slug
+        $post = Post::whereSlug($slug)->firstOrFail();
+        return view('edit', compact('post'));
     }
 
     /**
