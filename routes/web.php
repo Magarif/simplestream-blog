@@ -14,8 +14,8 @@
 
 Route::get('/', 'PostController@index');
 Route::get('/home', 'PostController@index');
-Route::get('/create', 'PostController@create');
-Route::post('/create', 'PostController@store');
+Route::get('/create', 'PostController@create')->middleware('auth');
+Route::post('/create', 'PostController@store')->middleware('auth');
 Route::get('/post/{slug?}', 'PostController@show');
 Route::get('/post/{slug?}/edit', 'PostController@edit');
 Route::patch('/post/{slug?}/edit', 'PostController@update');
