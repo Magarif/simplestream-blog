@@ -7,6 +7,16 @@
         <h3>Create post</h3>
         <hr>
         <div class="col-md-8">
+            @foreach($errors->all() as $error)
+                <div class="alert alert-danger">
+                    <p>{{ $error }}</p>
+                </div>
+            @endforeach
+            @if (session('status'))
+                <div class="alert alert-success">
+                    <p>{{ session('status') }}</p>
+                </div>
+            @endif
             <form method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
