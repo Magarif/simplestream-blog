@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostCreateRequest;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -33,12 +34,22 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param PostCreateRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(PostCreateRequest $request)
     {
-        //
+        // Generate unique slug
+        $slug = uniqid();
+        // Store post object in db
+        $post = new Post([
+            'title' => $request->get('title'),
+            'body' => $request->get('body'),
+            'slug' => $slug
+        ]);
+        $post->save();
+        // Redirect
+        return redirect('/create')->with('status', 'The post with the slug ' . $slug . 'has been created!');
     }
 
     /**
