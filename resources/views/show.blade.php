@@ -11,6 +11,11 @@
                 <p>{{ $error }}</p>
             </div>
         @endforeach
+        @if(session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
         <div class="content">
             <h2 class="header">{!! $post->title !!}</h2>
             <p>{!! $post->body !!}</p>
@@ -23,6 +28,22 @@
                     @method('DELETE')
                     <div>
                         <button type="submit" class="btn btn-dark">Delete post</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post" action="/comment">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="post_id" value="{!! $post->id !!}">
+                    <div class="form-group">
+                        <label for="text"><strong>Post Comment</strong></label>
+                        <textarea rows="3" class="form-control" id="text" name="text" placeholder="Enter comment"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-dark">Post Comment</button>
                     </div>
                 </form>
             </div>
