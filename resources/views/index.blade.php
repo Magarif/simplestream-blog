@@ -6,6 +6,16 @@
         <br>
         <h3>Post List</h3>
         <hr>
+        @foreach($errors->all() as $error)
+            <div class="alert alert-danger">
+                <p>{{ $error }}</p>
+            </div>
+        @endforeach
+        @if(session('status'))
+            <div class="alert alert-success">
+                <p>{{ session('status') }}</p>
+            </div>
+        @endif
         @if (!$posts->isEmpty())
             @foreach($posts as $post)
                 <div class="card">
