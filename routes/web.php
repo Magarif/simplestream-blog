@@ -27,4 +27,4 @@ Route::get('/auth/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('/auth/login', 'Auth\LoginController@login');
 Route::get('/auth/logout', 'Auth\LoginController@logout');
 // Comment route
-Route::post('/comment', 'CommentsController@newComment');
+Route::post('/comment', 'CommentsController@newComment')->middleware('auth');
