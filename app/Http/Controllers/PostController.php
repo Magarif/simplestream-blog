@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostCreateRequest;
 use App\Post;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {
@@ -24,7 +27,7 @@ class PostController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function create()
     {
@@ -36,7 +39,7 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      *
      * @param PostCreateRequest $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function store(PostCreateRequest $request)
     {
@@ -60,7 +63,7 @@ class PostController extends Controller
      * Display the specified resource.
      *
      * @param  string  $slug
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function show($slug)
     {
@@ -75,7 +78,7 @@ class PostController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  string  $slug
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     * @return Factory|RedirectResponse|Redirector|View
      */
     public function edit($slug)
     {
@@ -94,7 +97,7 @@ class PostController extends Controller
      *
      * @param  PostCreateRequest  $request
      * @param  string  $slug
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function update(PostCreateRequest $request, $slug)
     {
@@ -116,7 +119,7 @@ class PostController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  string  $slug
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function destroy($slug)
     {

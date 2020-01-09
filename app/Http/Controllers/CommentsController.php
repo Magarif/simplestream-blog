@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Http\Requests\CommentsFormRequest;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
 class CommentsController extends Controller
@@ -14,7 +14,7 @@ class CommentsController extends Controller
      * Generate new comment
      *
      * @param CommentsFormRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function newComment(CommentsFormRequest $request)
     {
