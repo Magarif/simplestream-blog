@@ -6,6 +6,11 @@
         <br>
         <h3>Register user</h3>
         <hr>
+        @foreach($errors->all() as $error)
+            <div class="alert alert-danger">
+                <p>{{ $error }}</p>
+            </div>
+        @endforeach
         <div class="col-md-6">
             <form method="post">
                 {{ csrf_field() }}
