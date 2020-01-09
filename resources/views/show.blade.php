@@ -6,6 +6,11 @@
         <br>
         <h3>Detail view post</h3>
         <hr>
+        @foreach($errors->all() as $error)
+            <div class="alert alert-danger">
+                <p>{{ $error }}</p>
+            </div>
+        @endforeach
         <div class="content">
             <h2 class="header">{!! $post->title !!}</h2>
             <p>{!! $post->body !!}</p>
