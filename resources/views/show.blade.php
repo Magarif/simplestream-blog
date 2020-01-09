@@ -20,28 +20,34 @@
             <h2 class="header">{!! $post->title !!}</h2>
             <p>{!! $post->body !!}</p>
         </div>
-        <div class="container">
-            <div class="row">
-                <a href="{!! action('PostController@edit', $post->slug) !!}" class="btn btn-primary pull-left">Edit post</a>&nbsp;
-                <form method="post" action="{!! action('PostController@destroy', $post->slug) !!}" class="pull-left">
-                    {{ csrf_field() }}
-                    @method('DELETE')
-                    <div>
-                        <button type="submit" class="btn btn-dark">Delete post</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <hr>
-        <h3>Comments</h3>
-        @foreach($comments as $comment)
-            <div class="card">
-                <div class="card-body">
-                    {!! $comment->text !!}
+        @if(Auth::check())
+            <div class="container">
+                <div class="row">
+                    <a href="{!! action('PostController@edit', $post->slug) !!}" class="btn btn-primary pull-left">Edit post</a>&nbsp;
+                    <form method="post" action="{!! action('PostController@destroy', $post->slug) !!}" class="pull-left">
+                        {{ csrf_field() }}
+                        @method('DELETE')
+                        <div>
+                            <button type="submit" class="btn btn-dark">Delete post</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <br>
-        @endforeach
+        @endif
+        <hr>
+        @if (!$comments->isEmpty())
+            <h3>Comments</h3>
+            @foreach($comments as $comment)
+                <div class="card">
+                    <div class="card-body">
+                        {!! $comment->text !!}
+                    </div>
+                </div>
+                <br>
+            @endforeach
+        @else
+            <h5>There are no comments for this post!</h5>
+        @endif
         <hr>
         @if(Auth::check())
             <div class="row">
