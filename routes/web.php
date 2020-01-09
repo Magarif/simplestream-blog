@@ -17,3 +17,4 @@ Route::get('/create', 'PostController@create');
 Route::post('/create', 'PostController@store');
 Route::get('/post/{slug?}', 'PostController@show');
 Route::get('/post/{slug?}/edit', 'PostController@edit');
+Route::patch('/post/{slug?}/edit', 'PostController@update');

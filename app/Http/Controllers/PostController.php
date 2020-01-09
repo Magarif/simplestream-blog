@@ -81,13 +81,20 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  PostCreateRequest  $request
+     * @param  string  $slug
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request, $id)
+    public function update(PostCreateRequest $request, $slug)
     {
-        //
+        // Get post by unique slug
+        $post = Post::whereSlug($slug)->firstOrFail();
+        // Define properties from request data
+        $post->title = $request->get('title');
+        $post->body = $request->get('body');
+        // Store new values and redirect
+        $post->save();
+        return redirect(action('PostController@edit', $post->slug))->with('status', 'The post with the slug ' . $slug . ' has been updated!');
     }
 
     /**
