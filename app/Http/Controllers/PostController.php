@@ -65,8 +65,10 @@ class PostController extends Controller
     public function show($slug)
     {
         // Get post by unique slug
+        /** @var Post $post */
         $post = Post::whereSlug($slug)->firstOrFail();
-        return view('show', compact('post'));
+        $comments = $post->comments()->get();
+        return view('show', compact('post', 'comments'));
     }
 
     /**
