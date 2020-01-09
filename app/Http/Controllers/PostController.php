@@ -48,12 +48,14 @@ class PostController extends Controller
         // Generate unique slug
         $slug = uniqid();
         // Store post object in db
-        $post = new Post([
-            'title' => $request->get('title'),
-            'body' => $request->get('body'),
-            'slug' => $slug,
-            'user_id' => $user->getAuthIdentifier()
-        ]);
+        $post = new Post(
+            [
+                'title' => $request->get('title'),
+                'body' => $request->get('body'),
+                'slug' => $slug,
+                'user_id' => $user->getAuthIdentifier()
+            ]
+        );
         $post->save();
         // Redirect
         return redirect('/create')->with('status', 'The post with the slug ' . $slug . ' has been created!');
@@ -62,7 +64,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  string  $slug
+     * @param string $slug
      * @return Factory|View
      */
     public function show($slug)
@@ -77,7 +79,7 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  string  $slug
+     * @param string $slug
      * @return Factory|RedirectResponse|Redirector|View
      */
     public function edit($slug)
@@ -88,15 +90,17 @@ class PostController extends Controller
         if (Auth::id() == $post->user_id) {
             return view('edit', compact('post'));
         } else {
-            return redirect(action('PostController@show', $post->slug))->withErrors('You are not the original post writer!');
+            return redirect(action('PostController@show', $post->slug))->withErrors(
+                'You are not the original post writer!'
+            );
         }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  PostCreateRequest  $request
-     * @param  string  $slug
+     * @param PostCreateRequest $request
+     * @param string $slug
      * @return RedirectResponse|Redirector
      */
     public function update(PostCreateRequest $request, $slug)
@@ -109,16 +113,21 @@ class PostController extends Controller
         // Allow post update only to post writers
         if (Auth::id() == $post->user_id) {
             $post->save();
-            return redirect(action('PostController@edit', $post->slug))->with('status', 'The post with the slug ' . $slug . ' has been updated!');
+            return redirect(action('PostController@edit', $post->slug))->with(
+                'status',
+                'The post with the slug ' . $slug . ' has been updated!'
+            );
         } else {
-            return redirect(action('PostController@show', $post->slug))->withErrors('You are not the original post writer!');
+            return redirect(action('PostController@show', $post->slug))->withErrors(
+                'You are not the original post writer!'
+            );
         }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  string  $slug
+     * @param string $slug
      * @return RedirectResponse|Redirector
      */
     public function destroy($slug)
@@ -130,7 +139,9 @@ class PostController extends Controller
             $post->delete();
             return redirect('/home')->with('status', 'The post with the slug ' . $slug . ' has been deleted!');
         } else {
-            return redirect(action('PostController@show', $post->slug))->withErrors('You are not the original post writer!');
+            return redirect(action('PostController@show', $post->slug))->withErrors(
+                'You are not the original post writer!'
+            );
         }
     }
 }
