@@ -9,6 +9,20 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    User
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    @if(Auth::check())
+                        <a class="dropdown-item" href="/auth/logout">Logout</a>
+                    @else
+                        <a class="dropdown-item" href="/auth/login">Login</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/auth/register">Register</a>
+                    @endif
+                </div>
+            </li>
         </ul>
     </div>
 </nav>
