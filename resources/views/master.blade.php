@@ -11,6 +11,7 @@
     <title>@yield('title')</title>
 </head>
 <body>
+    @include('shared.navbar')
     @yield('content')
 
     <!-- Optional JavaScript -->
