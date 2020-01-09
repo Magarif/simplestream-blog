@@ -56,7 +56,7 @@ class PostController extends Controller
         ]);
         $post->save();
         // Redirect
-        return redirect('/create')->with('status', 'The post with the slug ' . $slug . 'has been created!');
+        return redirect('/create')->with('status', 'The post with the slug ' . $slug . ' has been created!');
     }
 
     /**
